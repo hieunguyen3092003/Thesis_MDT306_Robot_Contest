@@ -1,0 +1,16 @@
+{
+  "name": "thesis_mdt143_robot_contest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "blockly": "^11.1.1",
+    "bootstrap": "^5.3.3"
+  }
+}

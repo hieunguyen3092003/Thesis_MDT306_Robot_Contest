@@ -1,11 +1,11 @@
 # Node.js modules
-web_app/node_modules/
-npm-debug.log*
-
-# blockly when using CDN
-blockly/
+./web_app/node_modules/
+./npm-debug.log*
 
 # temp files
-dist/
-tmp/
-*.log
+./dist/
+./tmp/
+./*.log
+
+# testing files
+./testing

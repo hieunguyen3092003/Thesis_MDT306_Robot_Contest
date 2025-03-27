@@ -1,0 +1,3 @@
+../Core/Src/line_sensor.c:19:10:SensorCalib	1
+../Core/Src/line_sensor.c:24:10:SensorScan	17
+../Core/Src/line_sensor.c:76:13:SensorGetLine	1

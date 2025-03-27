@@ -1,0 +1,13 @@
+# CHANGELOG
+
+## [0.0] - Nov 5, 2024
+### Added
+- Initialize project
+
+## [0.1] -
+### Added
+- 
+### Changed
+-
+### Fixed
+-

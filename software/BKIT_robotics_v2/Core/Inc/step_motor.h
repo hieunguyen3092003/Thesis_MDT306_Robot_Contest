@@ -4,6 +4,12 @@
 #include "tim.h"
 #include "gpio.h"
 
-void move_step_motor(uint8_t directtion, uint16_t cycle);
+enum Step_Direction
+{
+    DOWN,
+    UP
+};
+
+void stepMotorMove(enum Step_Direction direction, uint16_t cycle);
 
 #endif /* INC_STEP_MOTOR_H_ */

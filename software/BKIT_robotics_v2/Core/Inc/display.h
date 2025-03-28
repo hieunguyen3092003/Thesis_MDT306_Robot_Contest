@@ -7,5 +7,6 @@ void initDisplay(void);
 void displayScan(void);
 void displayLed7Seg(const uint16_t number);
 void displayLeds(const uint8_t data_byte);
+uint8_t mirrorByte(uint8_t data_byte);
 
 #endif /* INC_DISPLAY_H_ */

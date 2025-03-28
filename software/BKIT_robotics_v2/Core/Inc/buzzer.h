@@ -1,11 +1,10 @@
 #ifndef INC_BUZZER_H_
 #define INC_BUZZER_H_
 
-/* Includes */
 #include <stdint.h>
 
-/* Functions */
-void buzzer_init();
-void buzzer_set_duty_cycle(uint8_t duty_cycle);
+void initBuzzer(void);
+void buzzerSetFreq(uint32_t frequency);
+void buzzerStop(void);
 
 #endif /* INC_BUZZER_H_ */

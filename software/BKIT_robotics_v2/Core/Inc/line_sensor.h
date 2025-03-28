@@ -3,20 +3,31 @@
 
 #include <stdint.h>
 
-#define LINE_END 0
-#define LINE_CROSS 1
-#define LINE_LEFT1 2
-#define LINE_RIGHT1 3
-#define LINE_CENTER 4
-#define LINE_LEFT2 5
-#define LINE_RIGHT2 6
-#define LINE_LEFT3 7
-#define LINE_RIGHT3 8
-#define LINE_ERROR 9
+enum Line_Status
+{
+    LINE_END,
+    LINE_CROSS,
+    LINE_CENTER,
+    LINE_RIGHT1,
+    LINE_RIGHT2,
+    LINE_RIGHT3,
+    LINE_LEFT1,
+    LINE_LEFT2,
+    LINE_LEFT3,
+    LINE_ERROR
+};
+
+enum Obstacle_Status
+{
+    OBSTACLE_NONE,
+    OBSTACLE_LEFT,
+    OBSTACLE_RIGHT,
+    OBSTACLE_FRONT,
+};
 
 void SensorCalib(void);
 void SensorScan(void);
-
-uint8_t SensorGetLine();
+enum Line_Status SensorGetLineStatus(void);
+enum Obstacle_Status SensorGetObstacleStatus(void);
 
 #endif /* INC_LINE_SENSOR_H_ */

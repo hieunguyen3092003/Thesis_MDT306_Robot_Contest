@@ -32,11 +32,12 @@
 #include "software_timer.h"
 #include "servo.h"
 #include "motor.h"
+#include "step_motor.h"
 #include "display.h"
+#include "uart.h"
 #include "line_sensor.h"
-// #include "step_motor.h"
-// #include "uart.h"
-// #include "buzzer.h"
+#include "buzzer.h"
+
 // #include "encoder.h"
 
 /* USER CODE END Includes */
@@ -117,12 +118,16 @@ int main(void)
   initSystem();
   sTimer2Set(0, 1000);
 
-  servoSetAngle(SERVO_3, 0);
+  servoSetAngle(SERVO_3, 150);
 
-  moveDirection(LEFT, 10);
+  moveDirection(FORWARD, 50);
 
   displayLed7Seg(1);
   displayLeds(0b00000001);
+
+  stepMotorMove(UP, 10);
+
+  buzzerSetFreq(1000);
 
   /* USER CODE END 2 */
 
@@ -133,8 +138,6 @@ int main(void)
     if (sTimer2GetFlag())
     {
       HAL_GPIO_TogglePin(LED_DEBUG_GPIO_Port, LED_DEBUG_Pin);
-
-      SensorScan();
     }
 
     /* USER CODE END WHILE */
@@ -203,10 +206,11 @@ void initSystem()
 
   initDisplay();
 
+  initUartIt();
+
   SensorCalib();
-  //  buzzer_init();
-  //  dc_init();
-  //  uart_init();
+
+  initBuzzer();
 }
 /* USER CODE END 4 */
 

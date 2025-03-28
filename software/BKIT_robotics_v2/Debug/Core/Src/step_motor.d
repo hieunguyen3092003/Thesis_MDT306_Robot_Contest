@@ -28,7 +28,7 @@ Core/Src/step_motor.o: ../Core/Src/step_motor.c ../Core/Inc/step_motor.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- ../Core/Inc/gpio.h
+ ../Core/Inc/gpio.h ../Core/Inc/tim.h ../Core/Inc/gpio.h
 ../Core/Inc/step_motor.h:
 ../Core/Inc/tim.h:
 ../Core/Inc/main.h:
@@ -60,4 +60,6 @@ Core/Src/step_motor.o: ../Core/Src/step_motor.c ../Core/Inc/step_motor.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
+../Core/Inc/gpio.h:
+../Core/Inc/tim.h:
 ../Core/Inc/gpio.h:

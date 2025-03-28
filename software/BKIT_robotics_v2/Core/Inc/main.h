@@ -95,8 +95,16 @@ void Error_Handler(void);
 #define ENCODER1_B_GPIO_Port GPIOD
 #define SM_FAULT_Pin GPIO_PIN_3
 #define SM_FAULT_GPIO_Port GPIOB
+#define SM_STEP_Pin GPIO_PIN_4
+#define SM_STEP_GPIO_Port GPIOB
 #define SM_DIR_Pin GPIO_PIN_5
 #define SM_DIR_GPIO_Port GPIOB
+#define RC_SERVO_3_Pin GPIO_PIN_6
+#define RC_SERVO_3_GPIO_Port GPIOB
+#define RC_SERVO_2_Pin GPIO_PIN_7
+#define RC_SERVO_2_GPIO_Port GPIOB
+#define RC_SERVO_1_Pin GPIO_PIN_8
+#define RC_SERVO_1_GPIO_Port GPIOB
 #define ENCODER1_A_Pin GPIO_PIN_9
 #define ENCODER1_A_GPIO_Port GPIOB
 

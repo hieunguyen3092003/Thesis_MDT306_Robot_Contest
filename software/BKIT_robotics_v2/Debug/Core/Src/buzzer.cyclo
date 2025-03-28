@@ -1,2 +1,3 @@
-../Core/Src/buzzer.c:6:6:buzzer_init	1
-../Core/Src/buzzer.c:10:6:buzzer_set_duty_cycle	1
+../Core/Src/buzzer.c:9:7:initBuzzer	1
+../Core/Src/buzzer.c:14:7:buzzerSetFreq	3
+../Core/Src/buzzer.c:36:7:buzzerStop	1

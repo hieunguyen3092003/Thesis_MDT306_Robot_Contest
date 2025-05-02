@@ -20,6 +20,7 @@
 #include "main.h"
 #include "adc.h"
 #include "dma.h"
+#include "i2c.h"
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
@@ -28,17 +29,29 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdlib.h>
+#include <stdint.h>
 
+#include "global.h"
 #include "software_timer.h"
+
 #include "servo.h"
 #include "motor.h"
+#include "encoder.h"
 #include "step_motor.h"
-#include "display.h"
-#include "uart.h"
 #include "line_sensor.h"
+#include "gamepad.h"
+#include "module_mke_m15.h"
+
+#include "button.h"
+#include "switch.h"
+
+#include "display.h"
 #include "buzzer.h"
 
-// #include "encoder.h"
+#include "uart.h"
+#include "utils.h"
+
+#include "robot_firmware.h"
 
 /* USER CODE END Includes */
 
@@ -114,20 +127,11 @@ int main(void)
   MX_TIM5_Init();
   MX_SPI1_Init();
   MX_ADC1_Init();
+  MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
-  initSystem();
-  sTimer2Set(0, 1000);
 
-  servoSetAngle(SERVO_3, 150);
-
-  moveDirection(FORWARD, 50);
-
-  displayLed7Seg(1);
-  displayLeds(0b00000001);
-
-  stepMotorMove(UP, 10);
-
-  buzzerSetFreq(1000);
+  displayLed7Seg((uint8_t)getModeId());
+  (void)setupRobot();
 
   /* USER CODE END 2 */
 
@@ -135,10 +139,141 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    if (sTimer2GetFlag())
-    {
-      HAL_GPIO_TogglePin(LED_DEBUG_GPIO_Port, LED_DEBUG_Pin);
-    }
+    (void)processRobot();
+
+    // if (getFlagUart1())
+    // {
+    // }
+    // if (getFlagUart2())
+    // {
+    // }
+    // if (sTimer2GetFlag())
+    // {
+    // SensorScan();
+    // displayLeds(getSensorState());
+    // displayLed7Seg(SensorGetLineStatus());
+
+    // if (readGamepadData() == STATUS_OK)
+    // {
+    //   if (isGamepadButtonPressed(BUTTON_UP))
+    //   {
+    //     displayLeds(getGamepadData()[1]);
+    //     moveDirection(FORWARD, 50);
+    //   }
+    //   else if (isGamepadButtonPressed(BUTTON_DOWN))
+    //   {
+    //     displayLeds(getGamepadData()[1]);
+    //     moveDirection(BACKWARD, 50);
+    //   }
+    //   else if (isGamepadButtonPressed(BUTTON_LEFT))
+    //   {
+    //     displayLeds(getGamepadData()[1]);
+    //     moveDirection(LEFT, 50);
+    //   }
+    //   else if (isGamepadButtonPressed(BUTTON_RIGHT))
+    //   {
+    //     displayLeds(getGamepadData()[1]);
+    //     moveDirection(RIGHT, 50);
+    //   }
+
+    //   else if (isGamepadButtonPressed(BUTTON_SQUARE))
+    //   {
+    //     displayLeds(getGamepadData()[27]);
+    //     moveDirection(ROTATE_LEFT, 50);
+    //   }
+    //   else if (isGamepadButtonPressed(BUTTON_CIRCLE))
+    //   {
+    //     displayLeds(getGamepadData()[27]);
+    //     moveDirection(ROTATE_RIGHT, 50);
+    //   }
+    //   else
+    //   {
+    //     scanButton();
+    //     if (isButtonPressed(BUTTON_1))
+    //     {
+    //       moveForward(50);
+    //     }
+    //     else if (isButtonPressed(BUTTON_2))
+    //     {
+    //       moveBackward(50);
+    //     }
+    //     else if (isButtonPressed(BUTTON_3))
+    //     {
+    //       moveLeft(50);
+    //     }
+    //     else if (isButtonPressed(BUTTON_4))
+    //     {
+    //       moveRight(50);
+    //     }
+    //     else
+    //     {
+    //       motorStop();
+    //     }
+    //   }
+    // }
+
+    // HAL_GPIO_TogglePin(LED_DEBUG_GPIO_Port, LED_DEBUG_Pin);
+    // scanButton();
+    // displayLed7Seg(state);
+    // if (state == 0)
+    // {
+    //   if (isButtonPressed(1))
+    //   {
+    //     state = 1;
+    //   }
+    // }
+    // else if (state == 1)
+    // {
+    //   autoProcess();
+    //   motorStop();
+    //   state = 0;
+    // }
+    // else if (state == 2)
+    // {
+    //   followLineForward();
+    //   if (isButtonPressed(1))
+    //   {
+    //     state = 2;
+    //     motorStop();
+    //   }
+    // }
+    // else if (state == 3)
+    // {
+    //   goLeftUntilMeetLine();
+    //   if (isButtonPressed(1))
+    //   {
+    //     state = 0;
+    //     motorStop();
+    //   }
+    // }
+    // else if (state == 4)
+    // {
+    //   goRightUntilMeetLine();
+    //   if (isButtonPressed(1))
+    //   {
+    //     state = 0;
+    //     motorStop();
+    //   }
+    // }
+
+    // if (isButtonPressed(0))
+    // {
+    //   stepMotorMove(UP, 5);
+    //   HAL_Delay(5000);
+    //   motorStop();
+    // }
+
+    // if (isButtonPressed(2))
+    // {
+    //   state = 3;
+    // }
+
+    // if (isButtonPressed(3))
+    // {
+    //   state = 4;
+    // }
+    //      followLine();
+    // }
 
     /* USER CODE END WHILE */
 
@@ -193,24 +328,55 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void initSystem()
+void autoProcess()
 {
-  initTimer2();
-
-  initServo(SERVO_3);
-
-  initMotor(MOTOR_1);
-  initMotor(MOTOR_2);
-  initMotor(MOTOR_3);
-  initMotor(MOTOR_4);
-
-  initDisplay();
-
-  initUartIt();
-
-  SensorCalib();
-
-  initBuzzer();
+  servoSetAngle(3, 1);
+  stepMotorMove(UP, 10);
+  HAL_Delay(3000);
+  goToTheNthCross(4);
+  rotateRight(35);
+  HAL_Delay(1100);
+  motorStop();
+  goLeftUntilMeetLine();
+  goToTheNthCross(2);
+  moveForward(35);
+  HAL_Delay(350);
+  motorStop();
+  HAL_Delay(2000);
+  stepMotorMove(DOWN, 10);
+  HAL_Delay(3000);
+  servoSetAngle(3, 40);
+  HAL_Delay(2000);
+  stepMotorMove(UP, 10);
+  HAL_Delay(3000);
+  rotateLeft(35);
+  HAL_Delay(1100);
+  motorStop();
+  goLeftUntilMeetLine();
+  goToTheNthCross(2);
+  moveForward(40);
+  HAL_Delay(350);
+  motorStop();
+  stepMotorMove(DOWN, 10);
+  HAL_Delay(3000);
+  servoSetAngle(3, 1);
+  HAL_Delay(2000);
+  stepMotorMove(UP, 10);
+  HAL_Delay(3000);
+  goBackwardUntilMeetLine();
+  rotateLeft(35);
+  HAL_Delay(1000);
+  motorStop();
+  moveForward(40);
+  HAL_Delay(150);
+  motorStop();
+  goRightUntilMeetLine();
+  goToTheNthCross(2);
+  rotateRight(35);
+  HAL_Delay(1000);
+  motorStop();
+  goLeftUntilMeetLine();
+  goToTheNthCross(2);
 }
 /* USER CODE END 4 */
 

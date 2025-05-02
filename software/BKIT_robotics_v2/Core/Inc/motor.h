@@ -2,6 +2,7 @@
 #define INC_MOVE_H_
 
 #include <stdint.h>
+#include "global.h"
 
 enum Motor
 {
@@ -13,7 +14,6 @@ enum Motor
 
 enum Direction
 {
-    STOP,
     FORWARD,
     BACKWARD,
     LEFT,
@@ -26,8 +26,9 @@ enum Direction
     ROTATE_RIGHT
 };
 
-void initMotor(const enum Motor motor_id);
+enum StatusCode initMotor(const enum Motor motor_id);
 
+// These functions should be used to debug motor issues
 void motor1Rotates(const int speed);
 void motor2Rotates(const int speed);
 void motor3Rotates(const int speed);
@@ -56,7 +57,5 @@ void rotateLeft(const int speed);
 void rotateRight(const int speed);
 
 void moveDirection(const enum Direction direction, const int speed);
-// void followLine();
-// int followLineUntilCross();
 
 #endif /* INC_MOVE_H_ */

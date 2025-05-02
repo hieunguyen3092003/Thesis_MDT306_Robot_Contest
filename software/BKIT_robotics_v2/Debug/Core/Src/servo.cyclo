@@ -1,2 +1,2 @@
-../Core/Src/servo.c:19:7:initServo	1
-../Core/Src/servo.c:33:7:servoSetAngle	5
+../Core/Src/servo.c:22:18:initServo	3
+../Core/Src/servo.c:45:7:servoSetAngle	5

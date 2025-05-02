@@ -2,6 +2,7 @@
 #define INC_SERVO_H_
 
 #include <stdint.h>
+#include "global.h"
 
 enum Servo
 {
@@ -10,7 +11,7 @@ enum Servo
     SERVO_3
 };
 
-void initServo(const enum Servo servo_id);
-void servoSetAngle(const enum Servo servo_id, uint16_t angle);
+enum StatusCode initServo(const enum Servo servo_id);
+void servoSetAngle(const enum Servo servo_id, uint8_t angle);
 
 #endif /* INC_SERVO_H_ */

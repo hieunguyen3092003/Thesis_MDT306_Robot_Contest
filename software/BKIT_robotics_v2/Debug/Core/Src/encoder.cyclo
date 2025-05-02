@@ -1,1 +1,3 @@
-../Core/Src/encoder.c:12:6:read_encoder_data	6
+../Core/Src/encoder.c:19:10:scanEncoder	7
+../Core/Src/encoder.c:54:14:getPulseCount	1
+../Core/Src/encoder.c:59:14:getDeltaEncoder	1

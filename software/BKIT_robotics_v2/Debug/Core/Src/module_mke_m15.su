@@ -1,0 +1,4 @@
+../Core/Src/module_mke_m15.c:13:21:initModuleMKE	16	static
+../Core/Src/module_mke_m15.c:23:21:readSWGamepadData	16	static
+../Core/Src/module_mke_m15.c:58:13:isSWGamepadButtonPressed	16	static
+../Core/Src/module_mke_m15.c:128:29:getSWGamepadData	4	static

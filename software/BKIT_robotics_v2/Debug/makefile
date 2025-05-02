@@ -1,6 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (12.3.rel1)
+# Toolchain: GNU Tools for STM32 (13.3.rel1)
 ################################################################################
 
 -include ../makefile.init
@@ -63,8 +63,8 @@ all: main-build
 main-build: BKIT_robotics_v2.elf secondary-outputs
 
 # Tool invocations
-BKIT_robotics_v2.elf BKIT_robotics_v2.map: $(OBJS) $(USER_OBJS) /Users/ngtrunghieu/Documents/MacBook/Thesis_MDT306_Robot_Contest/software/BKIT_robotics_v2/STM32F103RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "BKIT_robotics_v2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/Users/ngtrunghieu/Documents/MacBook/Thesis_MDT306_Robot_Contest/software/BKIT_robotics_v2/STM32F103RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BKIT_robotics_v2.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+BKIT_robotics_v2.elf BKIT_robotics_v2.map: $(OBJS) $(USER_OBJS) /Users/ngtrunghieu/Downloads/Thesis_MDT306_Robot_Contest/software/BKIT_robotics_v2/STM32F103RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "BKIT_robotics_v2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/Users/ngtrunghieu/Downloads/Thesis_MDT306_Robot_Contest/software/BKIT_robotics_v2/STM32F103RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BKIT_robotics_v2.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

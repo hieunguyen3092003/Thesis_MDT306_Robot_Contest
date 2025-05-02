@@ -2,9 +2,10 @@
 #define INC_BUZZER_H_
 
 #include <stdint.h>
+#include "global.h"
 
-void initBuzzer(void);
-void buzzerSetFreq(uint32_t frequency);
-void buzzerStop(void);
+enum StatusCode initBuzzer(void);
+void setFreqBuzzer(const uint32_t frequency);
+void stopBuzzer(void);
 
 #endif /* INC_BUZZER_H_ */

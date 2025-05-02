@@ -1,87 +1,72 @@
 #include "encoder.h"
 
-GPIO_TypeDef* ENCODER_A_GPIO[4] = {ENCODER1_A_GPIO_Port, ENCODER2_A_GPIO_Port, ENCODER3_A_GPIO_Port, ENCODER4_A_GPIO_Port};
-uint16_t ENCODER_A_PIN[4] = {ENCODER1_A_Pin, ENCODER2_A_Pin, ENCODER3_A_Pin, ENCODER4_A_Pin};
+#include "gpio.h"
 
-GPIO_TypeDef* ENCODER_B_GPIO[4] = {ENCODER1_B_GPIO_Port, ENCODER2_B_GPIO_Port, ENCODER3_B_GPIO_Port, ENCODER4_B_GPIO_Port};
-uint16_t ENCODER_B_PIN[4] = {ENCODER1_B_Pin, ENCODER2_B_Pin, ENCODER3_B_Pin, ENCODER4_B_Pin};
+#ifdef __cplusplus
+extern "C"
+{
+#endif /* __cplusplus */
 
-int32_t encoder_pulse[4] = {0,0,0,0};
-uint8_t state[4] = {0,0,0,0};
+    GPIO_TypeDef *ENCODER_A_PORT[NUMBER_OF_ENCODER] = {ENCODER1_A_GPIO_Port, ENCODER2_A_GPIO_Port, ENCODER3_A_GPIO_Port, ENCODER4_A_GPIO_Port};
+    uint16_t ENCODER_A_PIN[NUMBER_OF_ENCODER] = {ENCODER1_A_Pin, ENCODER2_A_Pin, ENCODER3_A_Pin, ENCODER4_A_Pin};
 
-void read_encoder_data(){
-	for (uint8_t i = 0; i < 4; i++){
-		switch (state[i]) {
-//			case STATE_00:
-//				if(!HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i]) && HAL_GPIO_ReadPin(ENCODER_B_GPIO[i], ENCODER_B_PIN[i])){
-//					encoder_pulse[i] += 1;
-//					state[i] = STATE_01;
-//				}else if(HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i]) && !HAL_GPIO_ReadPin(ENCODER_B_GPIO[i], ENCODER_B_PIN[i])){
-//					encoder_pulse[i] -= 1;
-//					state[i] = STATE_10;
-//				}else if(HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i]) && HAL_GPIO_ReadPin(ENCODER_B_GPIO[i], ENCODER_B_PIN[i])){
-//					state[i] = STATE_11;
-//				}else if(!HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i]) && !HAL_GPIO_ReadPin(ENCODER_B_GPIO[i], ENCODER_B_PIN[i])){
-//					state[i] = STATE_00;
-//				}
-//				break;
-//			case STATE_01:
-//				if(HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i]) && HAL_GPIO_ReadPin(ENCODER_B_GPIO[i], ENCODER_B_PIN[i])){
-//					encoder_pulse[i] += 1;
-//					state[i] = STATE_11;
-//				}else if(!HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i]) && !HAL_GPIO_ReadPin(ENCODER_B_GPIO[i], ENCODER_B_PIN[i])){
-//					encoder_pulse[i] -= 1;
-//					state[i] = STATE_00;
-//				}else if(HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i]) && !HAL_GPIO_ReadPin(ENCODER_B_GPIO[i], ENCODER_B_PIN[i])){
-//					state[i] = STATE_10;
-//				}else if(!HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i]) && HAL_GPIO_ReadPin(ENCODER_B_GPIO[i], ENCODER_B_PIN[i])){
-//					state[i] = STATE_01;
-//				}
-//				break;
-//			case STATE_11:
-//				if(HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i]) && !HAL_GPIO_ReadPin(ENCODER_B_GPIO[i], ENCODER_B_PIN[i])){
-//					encoder_pulse[i] += 1;
-//					state[i] = STATE_10;
-//				}else if(!HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i]) && HAL_GPIO_ReadPin(ENCODER_B_GPIO[i], ENCODER_B_PIN[i])){
-//					encoder_pulse[i] -= 1;
-//					state[i] = STATE_01;
-//				}else if(HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i]) && HAL_GPIO_ReadPin(ENCODER_B_GPIO[i], ENCODER_B_PIN[i])){
-//					state[i] = STATE_11;
-//				}else if(!HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i]) && !HAL_GPIO_ReadPin(ENCODER_B_GPIO[i], ENCODER_B_PIN[i])){
-//					state[i] = STATE_00;
-//				}
-//				break;
-//			case STATE_10:
-//				if(!HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i]) && !HAL_GPIO_ReadPin(ENCODER_B_GPIO[i], ENCODER_B_PIN[i])){
-//					encoder_pulse[i] += 1;
-//					state[i] = STATE_00;
-//				}else if(HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i]) && HAL_GPIO_ReadPin(ENCODER_B_GPIO[i], ENCODER_B_PIN[i])){
-//					encoder_pulse[i] -= 1;
-//					state[i] = STATE_11;
-//				}else if(HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i]) && !HAL_GPIO_ReadPin(ENCODER_B_GPIO[i], ENCODER_B_PIN[i])){
-//					state[i] = STATE_10;
-//				}else if(!HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i]) && HAL_GPIO_ReadPin(ENCODER_B_GPIO[i], ENCODER_B_PIN[i])){
-//					state[i] = STATE_01;
-//				}
-//				break;
-//			default:
-//				state[i]=STATE_00;
-//				break;
-			case 0:
-				if(HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i])) {
-					state[i] = 1;
-					encoder_pulse[i]++;
-				}
-				else {
-					state[i] = 0;
-				}
-			case 1:
-				if(!HAL_GPIO_ReadPin(ENCODER_A_GPIO[i], ENCODER_A_PIN[i])) {
-					state[i] = 0;
-				}
-				else {
-					state[i] = 1;
-				}
-		}
-	}
+    uint32_t encoder_pulse_count[NUMBER_OF_ENCODER] = {0};
+    GPIO_PinState encoder_pin_a_state[NUMBER_OF_ENCODER] = {GPIO_PIN_RESET};
+
+    /**
+     * @brief This function should be called in interupt
+     */
+    void scanEncoder()
+    {
+        for (uint8_t i = 0; i < NUMBER_OF_ENCODER; ++i)
+        {
+            switch (HAL_GPIO_ReadPin(ENCODER_A_PORT[i], ENCODER_A_PIN[i]))
+            {
+            case GPIO_PIN_SET:
+            {
+                if (encoder_pin_a_state[i] == GPIO_PIN_RESET)
+                {
+                    encoder_pin_a_state[i] = GPIO_PIN_SET;
+
+                    if (encoder_pulse_count[i] < 0xFFFFFFFF)
+                    {
+                        ++encoder_pulse_count[i];
+                    }
+                    else
+                    {
+                        encoder_pulse_count[i] = 0;
+                    }
+                }
+                break;
+            }
+            case GPIO_PIN_RESET:
+            {
+                if (encoder_pin_a_state[i] == GPIO_PIN_SET)
+                {
+                    encoder_pin_a_state[i] = GPIO_PIN_RESET;
+                }
+                break;
+            }
+            }
+        }
+    }
+
+    uint32_t getPulseCount(const enum Encoder encoder_id)
+    {
+        return encoder_pulse_count[encoder_id];
+    }
+
+    uint32_t getDeltaEncoder(const enum Encoder encoder_id)
+    {
+        static uint32_t prev_encoder_pulse_count[NUMBER_OF_ENCODER] = {0};
+
+        uint32_t delta_encoder = encoder_pulse_count[encoder_id] - prev_encoder_pulse_count[encoder_id];
+
+        prev_encoder_pulse_count[encoder_id] = encoder_pulse_count[encoder_id];
+
+        return delta_encoder;
+    }
+
+#ifdef __cplusplus
 }
+#endif /* __cplusplus */

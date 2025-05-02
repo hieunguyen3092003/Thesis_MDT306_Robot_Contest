@@ -2,8 +2,9 @@
 #define INC_SOFTWARE_TIMER_H_
 
 #include <stdint.h>
+#include "global.h"
 
-void initTimer2(void);
+enum StatusCode initTimer2(void);
 void sTimer2Set(uint16_t delay, uint16_t period);
 uint8_t sTimer2GetFlag(void);
 

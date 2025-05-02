@@ -1,0 +1,4 @@
+../Core/Src/module_mke_m15.c:13:21:initModuleMKE	1
+../Core/Src/module_mke_m15.c:23:21:readSWGamepadData	7
+../Core/Src/module_mke_m15.c:58:13:isSWGamepadButtonPressed	11
+../Core/Src/module_mke_m15.c:128:29:getSWGamepadData	1

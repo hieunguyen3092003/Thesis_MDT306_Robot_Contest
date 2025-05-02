@@ -1,7 +1,9 @@
 #include "software_timer.h"
+
 #include "tim.h"
 
 #include "display.h"
+#include "encoder.h"
 
 #define TIMER_2_CYCLES 1
 
@@ -10,10 +12,6 @@ extern "C"
 {
 #endif /* __cplusplus */
 
-	void initTimer2(void);
-	void sTimer2Set(uint16_t delay, uint16_t period);
-	uint8_t sTimer2GetFlag(void);
-
 	uint8_t timer_2_flag = 0;
 	uint16_t timer_2_counter = 0;
 	uint16_t timer_2_mul = 0;
@@ -21,9 +19,18 @@ extern "C"
 	/**
 	 * @brief	init timer function
 	 */
-	void initTimer2()
+	enum StatusCode initTimer2()
 	{
-		HAL_TIM_Base_Start_IT(&htim2);
+		for (uint8_t attempt = 0; attempt < MAX_RETRY_COUNT; ++attempt)
+		{
+			if (HAL_TIM_Base_Start_IT(&htim2) == HAL_OK)
+			{
+				return STATUS_OK;
+			}
+
+			HAL_Delay(50);
+		}
+		return STATUS_ERROR;
 	}
 
 	/**
@@ -68,9 +75,10 @@ extern "C"
 			{
 				timer_2_flag = 1;
 			}
-		}
 
-		displayScan();
+			displayScan();
+			scanEncoder();
+		}
 	}
 
 #ifdef __cplusplus

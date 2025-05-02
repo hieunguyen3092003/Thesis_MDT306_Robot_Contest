@@ -1,8 +1,8 @@
 #ifndef INC_STEP_MOTOR_H_
 #define INC_STEP_MOTOR_H_
 
-#include "tim.h"
-#include "gpio.h"
+#include <stdint.h>
+#include "global.h"
 
 enum Step_Direction
 {
@@ -10,6 +10,7 @@ enum Step_Direction
     UP
 };
 
-void stepMotorMove(enum Step_Direction direction, uint16_t cycle);
+enum StatusCode calibStepMotor(void);
+enum StatusCode stepMotorMove(enum Step_Direction direction, uint16_t cycle);
 
 #endif /* INC_STEP_MOTOR_H_ */

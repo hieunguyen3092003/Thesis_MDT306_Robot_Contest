@@ -13,9 +13,18 @@ extern "C"
     uint16_t display_index = 0;
     uint8_t spi_buffer = 0xff;
 
-    void initDisplay()
+    enum StatusCode initDisplay()
     {
         HAL_GPIO_WritePin(LED_LATCH_GPIO_Port, LED_LATCH_Pin, 1);
+
+        HAL_GPIO_WritePin(LED_LATCH_GPIO_Port, LED_LATCH_Pin, 0);
+        if (HAL_SPI_Transmit(&hspi1, (void *)&spi_buffer, 1, 1) != HAL_OK)
+        {
+            HAL_GPIO_WritePin(LED_LATCH_GPIO_Port, LED_LATCH_Pin, 1);
+            return STATUS_ERROR;
+        }
+        HAL_GPIO_WritePin(LED_LATCH_GPIO_Port, LED_LATCH_Pin, 1);
+        return STATUS_OK;
     }
 
     /**
@@ -59,7 +68,7 @@ extern "C"
      * @return None
      * @note display_buffer[1] is the left digit, display_buffer[0] is the right digit
      */
-    void displayLed7Seg(const uint16_t number)
+    void displayLed7Seg(const uint8_t number)
     {
         display_buffer[1] = display_7seg_map[number / 10];
         display_buffer[0] = display_7seg_map[number % 10];
@@ -82,6 +91,11 @@ extern "C"
     void displayLeds(const uint8_t data_byte)
     {
         display_buffer[2] = ~mirrorByte(data_byte);
+    }
+
+    void toggleLedDebug()
+    {
+        HAL_GPIO_TogglePin(LED_DEBUG_GPIO_Port, LED_DEBUG_Pin);
     }
 
 #ifdef __cplusplus

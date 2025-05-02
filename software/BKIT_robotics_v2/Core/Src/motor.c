@@ -1,10 +1,9 @@
 #include "motor.h"
+
 #include "tim.h"
 #include "gpio.h"
-#include "button.h"
 
-#define MIN_SPEED 19.5
-#define MAX_SPEED 30
+#define NUMBER_OF_MOTORS 4
 
 #define UP 1
 #define DOWN 0
@@ -14,11 +13,19 @@ extern "C"
 {
 #endif /* __cplusplus */
 
-	const uint32_t motor_channel[] = {TIM_CHANNEL_4, TIM_CHANNEL_3, TIM_CHANNEL_1, TIM_CHANNEL_2};
+	const uint32_t motor_channel[NUMBER_OF_MOTORS] = {TIM_CHANNEL_4, TIM_CHANNEL_3, TIM_CHANNEL_1, TIM_CHANNEL_2};
 
-	void initMotor(const enum Motor motor_id)
+	enum StatusCode initMotor(const enum Motor motor_id)
 	{
-		HAL_TIM_PWM_Start(&htim8, motor_channel[motor_id]);
+		for (uint8_t attempt = 0; attempt < MAX_RETRY_COUNT; ++attempt)
+		{
+			if (HAL_TIM_PWM_Start(&htim8, motor_channel[motor_id]) == HAL_OK)
+			{
+				return STATUS_OK;
+			}
+			HAL_Delay(50);
+		}
+		return STATUS_ERROR;
 	}
 
 	void setSpeed(const enum Motor motor_id, uint8_t duty_cycle)
@@ -110,7 +117,6 @@ extern "C"
 	//         left		  ---+----     right		↻: rotateRight
 	//           backLeft    |  backRight
 	//                  backwards
-	//
 
 	void moveForward(const int speed)
 	{
@@ -148,7 +154,6 @@ extern "C"
 		motor3Rotates(speed);
 		motor4Rotates(0);
 	}
-
 	void moveFrontRight(const int speed)
 	{
 		motor1Rotates(speed);
@@ -156,7 +161,6 @@ extern "C"
 		motor3Rotates(0);
 		motor4Rotates(speed);
 	}
-
 	void moveBackLeft(const int speed)
 	{
 		motor1Rotates(-speed);
@@ -164,7 +168,6 @@ extern "C"
 		motor3Rotates(0);
 		motor4Rotates(-speed);
 	}
-
 	void moveBackRight(const int speed)
 	{
 		motor1Rotates(0);
@@ -180,7 +183,6 @@ extern "C"
 		motor3Rotates(speed);
 		motor4Rotates(speed);
 	}
-
 	void rotateRight(const int speed)
 	{
 		motor1Rotates(speed);
@@ -193,11 +195,6 @@ extern "C"
 	{
 		switch (direction)
 		{
-		case STOP:
-		{
-			motorStop();
-			break;
-		}
 		case FORWARD:
 		{
 			moveForward(speed);
@@ -250,63 +247,6 @@ extern "C"
 		}
 		}
 	}
-
-	// void followLine()
-	// {
-	// 	static int last_line_state = 0;
-	// 	uint8_t line_state = SensorGetLine();
-	// 	switch (line_state)
-	// 	{
-	// 	case LINE_CENTER:
-	// 		if (last_line_state == LINE_CENTER)
-	// 		{
-	// 			forward(MAX_SPEED);
-	// 		}
-	// 		else
-	// 		{
-	// 			forward(MIN_SPEED);
-	// 		}
-	// 		break;
-	// 	case LINE_LEFT1:
-	// 		runSpeed(MIN_SPEED, MIN_SPEED * 1.25);
-	// 		break;
-	// 	case LINE_LEFT2:
-	// 		runSpeed(0, MIN_SPEED);
-	// 		break;
-	// 	case LINE_LEFT3:
-	// 		runSpeed(-MIN_SPEED, MIN_SPEED);
-	// 		break;
-	// 	case LINE_RIGHT1:
-	// 		runSpeed(MIN_SPEED * 1.25, MIN_SPEED);
-	// 		break;
-	// 	case LINE_RIGHT2:
-	// 		runSpeed(MIN_SPEED, 0);
-	// 		break;
-	// 	case LINE_RIGHT3:
-	// 		runSpeed(MIN_SPEED, -MIN_SPEED);
-	// 		break;
-	// 	default:
-	// 		stop();
-	// 		break;
-	// 	}
-	// }
-
-	// int followLineUntilCross()
-	// {
-	// 	//	static int status = 0;
-	// 	//	uint8_t line_state = SensorGetLine();
-	// 	//	if(status == 0){
-	// 	//		if(line_state != LINE_CROSS) status = 1;
-	// 	//	} else if(status == 1){
-	// 	//		if(line_state == LINE_CROSS) {
-	// 	//			stop();
-	// 	////			status = 0;
-	// 	//			return 1;
-	// 	//		}
-	// 	//	}
-	// 	//	followLine();
-	// 	return 0;
-	// }
 
 #ifdef __cplusplus
 }

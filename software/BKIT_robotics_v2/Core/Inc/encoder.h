@@ -1,16 +1,22 @@
 #ifndef INC_ENCODER_H_
 #define INC_ENCODER_H_
 
-#include "gpio.h"
-#include "stm32f1xx.h"
+#include <stdint.h>
+#include "global.h"
 
-#define STATE_00	0
-#define STATE_01	1
-#define STATE_11	2
-#define STATE_10	3
+#define NUMBER_OF_ENCODER 4
+#define PULSE_PER_REVOLUTION 234 // Currently unused
 
-extern int32_t encoder_pulse[4];
+enum Encoder
+{
+    ENCODER_1,
+    ENCODER_2,
+    ENCODER_3,
+    ENCODER_4
+};
 
-void read_encoder_data(void);
+void scanEncoder(void);
+uint32_t getPulseCount(const enum Encoder encoder_id);
+uint32_t getDeltaEncoder(const enum Encoder encoder_id);
 
 #endif /* INC_ENCODER_H_ */

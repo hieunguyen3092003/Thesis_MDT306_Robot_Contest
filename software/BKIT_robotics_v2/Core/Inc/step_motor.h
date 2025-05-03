@@ -10,7 +10,6 @@ enum Step_Direction
     UP
 };
 
-enum StatusCode calibStepMotor(void);
-enum StatusCode stepMotorMove(enum Step_Direction direction, uint16_t cycle);
+enum StatusCode stepMotorMove(enum Step_Direction direction, uint8_t cycle);
 
 #endif /* INC_STEP_MOTOR_H_ */

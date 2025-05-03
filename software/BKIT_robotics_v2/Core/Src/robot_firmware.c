@@ -66,10 +66,6 @@ extern "C"
     {
         switch (mode_id)
         {
-        case MODE_TEST_STEP_MOTORS:
-        {
-            (void)calibStepMotor();
-        }
         case MODE_IDLE:
         case MODE_TEST_DEBUG_INDICATORS:
         case MODE_TEST_COMM:
@@ -77,6 +73,7 @@ extern "C"
         case MODE_TEST_ENCODERS:
         case MODE_TEST_PID:
         case MODE_TEST_SERVO_MOTORS:
+        case MODE_TEST_STEP_MOTORS:
         case MODE_TEST_SENSORS:
         case MODE_TEST_GAMEPAD:
         case MODE_TEST_MODULE_MKE:
@@ -401,6 +398,14 @@ extern "C"
                 else if (isButtonPressed(BUTTON_2))
                 {
                     stepMotorMove(DOWN, 1);
+                }
+                else if (isButtonPressed(BUTTON_3))
+                {
+                    stepMotorMove(UP, 0);
+                }
+                else if (isButtonPressed(BUTTON_4))
+                {
+                    stepMotorMove(UP, 3);
                 }
             }
             break;

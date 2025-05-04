@@ -1,0 +1,6 @@
+../Core/Src/line_sensor.c:26:8:calculateWeightedError	40	static
+../Core/Src/line_sensor.c:52:10:SensorCalib	8	static
+../Core/Src/line_sensor.c:57:10:SensorScan	16	static
+../Core/Src/line_sensor.c:208:11:getWeightError	4	static
+../Core/Src/line_sensor.c:217:22:SensorGetLineStatus	4	static
+../Core/Src/line_sensor.c:227:26:sensorGetObstacleStatus	4	static

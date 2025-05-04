@@ -1,0 +1,4 @@
+../Core/Src/robot_firmware.c:35:15:getModeId	1
+../Core/Src/robot_firmware.c:42:10:initSystem	1
+../Core/Src/robot_firmware.c:65:21:setupRobot	16
+../Core/Src/robot_firmware.c:141:21:processRobot	84

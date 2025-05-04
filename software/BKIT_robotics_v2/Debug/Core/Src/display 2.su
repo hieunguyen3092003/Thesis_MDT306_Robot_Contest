@@ -1,0 +1,5 @@
+../Core/Src/display.c:16:10:initDisplay	8	static
+../Core/Src/display.c:25:10:displayScan	8	static
+../Core/Src/display.c:62:10:displayLed7Seg	16	static
+../Core/Src/display.c:68:13:mirrorByte	16	static
+../Core/Src/display.c:82:10:displayLeds	16	static

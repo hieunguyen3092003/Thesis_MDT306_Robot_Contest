@@ -1,1 +1,2 @@
-../Core/Src/utils.c:3:6:int32_to_4_uint8	1
+../Core/Src/utils.c:11:6:uint32_to_bytes	2
+../Core/Src/utils.c:30:6:uint16_to_bytes	2

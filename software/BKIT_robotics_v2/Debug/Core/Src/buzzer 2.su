@@ -1,0 +1,3 @@
+../Core/Src/buzzer.c:9:7:initBuzzer	8	static
+../Core/Src/buzzer.c:14:7:buzzerSetFreq	32	static
+../Core/Src/buzzer.c:36:7:buzzerStop	8	static

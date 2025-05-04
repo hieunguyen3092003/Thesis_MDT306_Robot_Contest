@@ -1,0 +1,3 @@
+../Core/Src/button.c:21:18:initButton	8	static
+../Core/Src/button.c:38:18:scanButton	16	static
+../Core/Src/button.c:66:10:isButtonPressed	16	static

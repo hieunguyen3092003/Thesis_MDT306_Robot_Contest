@@ -1,11 +1,15 @@
-# Node.js modules
-./web_app/node_modules/
-./npm-debug.log*
+# Temporary files and logs
+dist/
+tmp/
+*.log
 
-# temp files
-./dist/
-./tmp/
-./*.log
+# Unused files
+yolobit.mext
+orccontrolhub.mext
 
-# testing files
-./testing
+# Unused folders
+BKIT_robotics_v1/
+BKIT_robotics_v2_old/
+BKIT_robotics_v2_old_2/
+BKIT_robotics_web_app/
+ORC_robotics/

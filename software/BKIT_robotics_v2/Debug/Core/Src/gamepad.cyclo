@@ -1,0 +1,4 @@
+../Core/Src/gamepad.c:23:21:initGamepad	3
+../Core/Src/gamepad.c:42:21:readGamepadData	2
+../Core/Src/gamepad.c:59:13:isGamepadButtonPressed	16
+../Core/Src/gamepad.c:155:20:getGamepadData	1

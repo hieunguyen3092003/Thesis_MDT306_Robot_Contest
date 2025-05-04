@@ -1,4 +1,4 @@
-../Core/Src/software_timer.c:24:7:initTimer2	8	static
-../Core/Src/software_timer.c:34:7:sTimer2Set	16	static
-../Core/Src/software_timer.c:45:10:sTimer2GetFlag	4	static
-../Core/Src/software_timer.c:59:7:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/software_timer.c:22:18:initTimer2	16	static
+../Core/Src/software_timer.c:41:7:sTimer2Set	16	static
+../Core/Src/software_timer.c:52:10:sTimer2GetFlag	4	static
+../Core/Src/software_timer.c:66:7:HAL_TIM_PeriodElapsedCallback	16	static

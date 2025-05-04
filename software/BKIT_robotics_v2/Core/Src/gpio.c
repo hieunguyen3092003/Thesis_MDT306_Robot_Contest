@@ -60,15 +60,15 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, M3_DIR_Pin|SM_DIR_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PCPin PCPin PCPin PCPin */
+  /*Configure GPIO pins : M1_DIR_Pin M2_DIR_Pin LED_DEBUG_Pin LED_LATCH_Pin */
   GPIO_InitStruct.Pin = M1_DIR_Pin|M2_DIR_Pin|LED_DEBUG_Pin|LED_LATCH_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PAPin PAPin PAPin PAPin
-                           PAPin */
+  /*Configure GPIO pins : M4_DIR_Pin LED_EN_Pin LED7_EN2_Pin LED7_EN1_Pin
+                           INPUT_LOAD_Pin */
   GPIO_InitStruct.Pin = M4_DIR_Pin|LED_EN_Pin|LED7_EN2_Pin|LED7_EN1_Pin
                           |INPUT_LOAD_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -76,28 +76,28 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PBPin PBPin */
+  /*Configure GPIO pins : M3_DIR_Pin SM_DIR_Pin */
   GPIO_InitStruct.Pin = M3_DIR_Pin|SM_DIR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PBPin PBPin PBPin PBPin
-                           PBPin PBPin */
+  /*Configure GPIO pins : ENCODER3_B_Pin ENCODER3_A_Pin ENCODER4_B_Pin ENCODER4_A_Pin
+                           SM_FAULT_Pin ENCODER1_A_Pin */
   GPIO_InitStruct.Pin = ENCODER3_B_Pin|ENCODER3_A_Pin|ENCODER4_B_Pin|ENCODER4_A_Pin
                           |SM_FAULT_Pin|ENCODER1_A_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PCPin PCPin */
+  /*Configure GPIO pins : ENCODER2_A_Pin ENCODER2_B_Pin */
   GPIO_InitStruct.Pin = ENCODER2_A_Pin|ENCODER2_B_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PtPin */
+  /*Configure GPIO pin : ENCODER1_B_Pin */
   GPIO_InitStruct.Pin = ENCODER1_B_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;

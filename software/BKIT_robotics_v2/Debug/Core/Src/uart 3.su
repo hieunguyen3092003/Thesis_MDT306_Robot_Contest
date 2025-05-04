@@ -1,0 +1,9 @@
+../Core/Src/uart.c:16:6:uartTransmit	16	static
+../Core/Src/uart.c:21:6:initUart	8	static
+../Core/Src/uart.c:31:6:clear_buffer	16	static
+../Core/Src/uart.c:40:6:check_function	8	static
+../Core/Src/uart.c:87:6:uart_process	8	static
+../Core/Src/uart.c:125:6:HAL_UART_RxCpltCallback	16	static
+../Core/Src/uart.c:137:6:move_process	8	static
+../Core/Src/uart.c:181:6:servo_process	8	static
+../Core/Src/uart.c:205:6:sm_process	8	static

@@ -2,6 +2,7 @@
 #define INC_LINE_SENSOR_H_
 
 #include <stdint.h>
+#include "global.h"
 
 enum Line_Status
 {
@@ -25,9 +26,13 @@ enum Obstacle_Status
     OBSTACLE_FRONT,
 };
 
-void SensorCalib(void);
-void SensorScan(void);
+enum StatusCode calibSensor(void);
+void sensorScan(void);
 enum Line_Status SensorGetLineStatus(void);
-enum Obstacle_Status SensorGetObstacleStatus(void);
+enum Obstacle_Status sensorGetObstacleStatus(void);
+
+uint8_t getSensorState(void);
+const uint16_t *getSensorCalibValue(void);
+const uint16_t *getSensorValue(void);
 
 #endif /* INC_LINE_SENSOR_H_ */

@@ -1,4 +1,7 @@
-../Core/Src/line_sensor.c:28:10:SensorCalib	8	static
-../Core/Src/line_sensor.c:33:10:SensorScan	16	static
-../Core/Src/line_sensor.c:139:22:SensorGetLineStatus	4	static
-../Core/Src/line_sensor.c:149:26:sensorGetObstacleStatus	4	static
+../Core/Src/line_sensor.c:28:18:calibSensor	16	static
+../Core/Src/line_sensor.c:41:7:sensorScan	16	static
+../Core/Src/line_sensor.c:171:19:SensorGetLineStatus	4	static
+../Core/Src/line_sensor.c:181:23:sensorGetObstacleStatus	4	static
+../Core/Src/line_sensor.c:189:10:getSensorState	4	static
+../Core/Src/line_sensor.c:193:18:getSensorCalibValue	4	static
+../Core/Src/line_sensor.c:197:18:getSensorValue	4	static

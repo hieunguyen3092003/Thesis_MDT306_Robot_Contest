@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-void int32_to_4_uint8(int32_t value, uint8_t *bytes);
+void uint32_to_bytes(const uint32_t *input_32b, uint8_t *output_8b, const uint8_t input_size);
+void uint16_to_bytes(const uint16_t *input_16b, uint8_t *output_8b, const uint8_t input_size);
 
 #endif /* INC_UTILS_H_ */

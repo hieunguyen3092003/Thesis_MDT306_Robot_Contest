@@ -1,2 +1,2 @@
-../Core/Src/step_motor.c:21:7:stepMotorMove	16	static
-../Core/Src/step_motor.c:30:7:HAL_TIM_PWM_PulseFinishedCallback	16	static
+../Core/Src/step_motor.c:27:18:stepMotorMove	16	static
+../Core/Src/step_motor.c:71:7:HAL_TIM_PWM_PulseFinishedCallback	16	static

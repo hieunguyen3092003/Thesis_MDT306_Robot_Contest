@@ -1,0 +1,8 @@
+../Core/Src/uart.c:24:6:uart_init	1
+../Core/Src/uart.c:33:6:clear_buffer	2
+../Core/Src/uart.c:40:6:check_function	17
+../Core/Src/uart.c:76:6:uart_process	7
+../Core/Src/uart.c:107:6:HAL_UART_RxCpltCallback	2
+../Core/Src/uart.c:117:6:move_process	7
+../Core/Src/uart.c:153:6:servo_process	7
+../Core/Src/uart.c:175:6:sm_process	7

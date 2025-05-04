@@ -1,0 +1,17 @@
+Default: NULL
+
+
+Button UP:          FF 01 01 01 02 00 01 00 FF 01 01 01 02 00 00 00
+Button DOWN:        FF 01 01 01 02 00 02 00 FF 01 01 01 02 00 00 00
+Button LEFT:        FF 01 01 01 02 00 04 00 FF 01 01 01 02 00 00 00 
+Button RIGHT:       FF 01 01 01 02 00 08 00 FF 01 01 01 02 00 00 00
+
+Button Triangle:    FF 01 01 01 02 04 00 00 FF 01 01 01 02 00 00 00 
+Button Circle:      FF 01 01 01 02 08 00 00 FF 01 01 01 02 00 00 00 
+Button Cross:       FF 01 01 01 02 10 00 00 FF 01 01 01 02 00 00 00 
+Button Square:      FF 01 01 01 02 20 00 00 FF 01 01 01 02 00 00 00 
+
+Button START:       FF 01 01 01 02 01 00 00 FF 01 01 01 02 00 00 00 
+BUTTON SELECT:      FF 01 01 01 02 02 00 00 FF 01 01 01 02 00 00 00 
+
+END COMMAND:                                FF 01 01 01 02 00 00 00 

@@ -1,0 +1,2 @@
+../Core/Src/switch.c:16:21:initSwitch	2
+../Core/Src/switch.c:34:13:getSwitchStatus	3

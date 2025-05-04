@@ -1,12 +1,15 @@
 #include "servo.h"
+
 #include "tim.h"
+
+#define NUMBER_OF_SERVO 3
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif /* __cplusplus */
 
-	const uint32_t servo_channel[] = {TIM_CHANNEL_3, TIM_CHANNEL_2, TIM_CHANNEL_1};
+	const uint32_t servo_channel[NUMBER_OF_SERVO] = {TIM_CHANNEL_3, TIM_CHANNEL_2, TIM_CHANNEL_1};
 
 	/**
 	 * @brief	init servo
@@ -16,9 +19,18 @@ extern "C"
 	 * SERVO2: TIM_CHANNEL_2
 	 * SERVO3: TIM_CHANNEL_1
 	 */
-	void initServo(const enum Servo servo_id)
+	enum StatusCode initServo(const enum Servo servo_id)
 	{
-		HAL_TIM_PWM_Start(&htim4, servo_channel[servo_id]);
+		for (uint8_t attempt = 0; attempt < MAX_RETRY_COUNT; ++attempt)
+		{
+			if (HAL_TIM_PWM_Start(&htim4, servo_channel[servo_id]) == HAL_OK)
+			{
+				return STATUS_OK;
+			}
+
+			HAL_Delay(50);
+		}
+		return STATUS_ERROR;
 	}
 
 	/**
@@ -30,15 +42,15 @@ extern "C"
 	 * SERVO2: TIM_CHANNEL_2
 	 * SERVO3: TIM_CHANNEL_1
 	 */
-	void servoSetAngle(const enum Servo servo_id, uint16_t angle)
+	void servoSetAngle(const enum Servo servo_id, uint8_t angle)
 	{
 		if (angle < 0)
 		{
 			angle = 0;
 		}
-		else if (angle > 180)
+		else if (angle > 55)
 		{
-			angle = 180;
+			angle = 55;
 		}
 
 		uint16_t duty_cycle = (angle * 110) / 180 + 20;

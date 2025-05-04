@@ -1,0 +1,5 @@
+../Core/Src/main.c:84:5:main	16	static
+../Core/Src/main.c:203:6:SystemClock_Config	96	static
+../Core/Src/main.c:246:6:initSystem	8	static
+../Core/Src/main.c:268:6:autoProcess	8	static
+../Core/Src/main.c:323:6:Error_Handler	4	static,ignoring_inline_asm
